@@ -1,0 +1,181 @@
+﻿  main.cpp
+G:\my\C-code\Space-War\Space-War\main.h(1,1): warning C4828: 文件包含在偏移 0x22 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+  (编译源文件“main.cpp”)
+  
+G:\my\C-code\Space-War\Space-War\main.h(1,1): warning C4828: 文件包含在偏移 0x24 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+  (编译源文件“main.cpp”)
+  
+G:\my\C-code\Space-War\Space-War\main.h(1,1): warning C4828: 文件包含在偏移 0x28 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+  (编译源文件“main.cpp”)
+  
+G:\my\C-code\Space-War\Space-War\main.h(1,1): warning C4828: 文件包含在偏移 0x47a 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+  (编译源文件“main.cpp”)
+  
+G:\my\C-code\Space-War\Space-War\main.h(1,1): warning C4828: 文件包含在偏移 0x47c 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+  (编译源文件“main.cpp”)
+  
+G:\my\C-code\Space-War\Space-War\main.h(1,1): warning C4828: 文件包含在偏移 0x47d 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+  (编译源文件“main.cpp”)
+  
+G:\my\C-code\Space-War\Space-War\main.h(1,1): warning C4828: 文件包含在偏移 0x481 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+  (编译源文件“main.cpp”)
+  
+G:\my\C-code\Space-War\Space-War\main.h(1,1): warning C4828: 文件包含在偏移 0x484 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+  (编译源文件“main.cpp”)
+  
+G:\my\C-code\Space-War\Space-War\main.h(1,1): warning C4828: 文件包含在偏移 0x485 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+  (编译源文件“main.cpp”)
+  
+G:\my\C-code\Space-War\Space-War\main.h(1,1): warning C4828: 文件包含在偏移 0x489 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+  (编译源文件“main.cpp”)
+  
+G:\my\C-code\Space-War\Space-War\main.h(1,1): warning C4828: 文件包含在偏移 0x554 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+  (编译源文件“main.cpp”)
+  
+G:\my\C-code\Space-War\Space-War\main.h(1,1): warning C4828: 文件包含在偏移 0x555 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+  (编译源文件“main.cpp”)
+  
+G:\my\C-code\Space-War\Space-War\main.h(1,1): warning C4828: 文件包含在偏移 0x55b 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+  (编译源文件“main.cpp”)
+  
+G:\my\C-code\Space-War\Space-War\main.h(1,1): warning C4828: 文件包含在偏移 0x863 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+  (编译源文件“main.cpp”)
+  
+G:\my\C-code\Space-War\Space-War\main.h(1,1): warning C4828: 文件包含在偏移 0x864 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+  (编译源文件“main.cpp”)
+  
+G:\my\C-code\Space-War\Space-War\main.h(1,1): warning C4828: 文件包含在偏移 0x915 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+  (编译源文件“main.cpp”)
+  
+G:\my\C-code\Space-War\Space-War\main.h(1,1): warning C4828: 文件包含在偏移 0x916 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+  (编译源文件“main.cpp”)
+  
+G:\my\C-code\Space-War\Space-War\main.h(1,1): warning C4828: 文件包含在偏移 0x969 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+  (编译源文件“main.cpp”)
+  
+G:\my\C-code\Space-War\Space-War\main.h(1,1): warning C4828: 文件包含在偏移 0x96a 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+  (编译源文件“main.cpp”)
+  
+G:\my\C-code\Space-War\Space-War\ene.h(13,18): warning C4244: “-=”: 从“double”转换到“_Ty”，可能丢失数据
+G:\my\C-code\Space-War\Space-War\ene.h(13,18): warning C4244:         with
+G:\my\C-code\Space-War\Space-War\ene.h(13,18): warning C4244:         [
+G:\my\C-code\Space-War\Space-War\ene.h(13,18): warning C4244:             _Ty=int
+G:\my\C-code\Space-War\Space-War\ene.h(13,18): warning C4244:         ]
+  (编译源文件“main.cpp”)
+  
+G:\my\C-code\Space-War\Space-War\ship.h(1,1): warning C4828: 文件包含在偏移 0x4d 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+  (编译源文件“main.cpp”)
+  
+G:\my\C-code\Space-War\Space-War\ship.h(1,1): warning C4828: 文件包含在偏移 0x50 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+  (编译源文件“main.cpp”)
+  
+G:\my\C-code\Space-War\Space-War\ship.h(1,1): warning C4828: 文件包含在偏移 0x53 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+  (编译源文件“main.cpp”)
+  
+G:\my\C-code\Space-War\Space-War\ship.h(1,1): warning C4828: 文件包含在偏移 0x54 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+  (编译源文件“main.cpp”)
+  
+G:\my\C-code\Space-War\Space-War\ship.h(1,1): warning C4828: 文件包含在偏移 0x82 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+  (编译源文件“main.cpp”)
+  
+G:\my\C-code\Space-War\Space-War\ship.h(1,1): warning C4828: 文件包含在偏移 0x84 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+  (编译源文件“main.cpp”)
+  
+G:\my\C-code\Space-War\Space-War\ship.h(1,1): warning C4828: 文件包含在偏移 0x85 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+  (编译源文件“main.cpp”)
+  
+G:\my\C-code\Space-War\Space-War\ship.h(1,1): warning C4828: 文件包含在偏移 0x89 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+  (编译源文件“main.cpp”)
+  
+G:\my\C-code\Space-War\Space-War\ship.h(1,1): warning C4828: 文件包含在偏移 0xa2 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+  (编译源文件“main.cpp”)
+  
+G:\my\C-code\Space-War\Space-War\ship.h(1,1): warning C4828: 文件包含在偏移 0xa4 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+  (编译源文件“main.cpp”)
+  
+G:\my\C-code\Space-War\Space-War\ship.h(1,1): warning C4828: 文件包含在偏移 0xa5 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+  (编译源文件“main.cpp”)
+  
+G:\my\C-code\Space-War\Space-War\ship.h(1,1): warning C4828: 文件包含在偏移 0xa9 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+  (编译源文件“main.cpp”)
+  
+G:\my\C-code\Space-War\Space-War\ship.h(1,1): warning C4828: 文件包含在偏移 0x131 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+  (编译源文件“main.cpp”)
+  
+G:\my\C-code\Space-War\Space-War\ship.h(1,1): warning C4828: 文件包含在偏移 0x133 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+  (编译源文件“main.cpp”)
+  
+G:\my\C-code\Space-War\Space-War\ship.h(1,1): warning C4828: 文件包含在偏移 0x134 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+  (编译源文件“main.cpp”)
+  
+G:\my\C-code\Space-War\Space-War\ship.h(1,1): warning C4828: 文件包含在偏移 0x135 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+  (编译源文件“main.cpp”)
+  
+G:\my\C-code\Space-War\Space-War\ship.h(1,1): warning C4828: 文件包含在偏移 0x137 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+  (编译源文件“main.cpp”)
+  
+G:\my\C-code\Space-War\Space-War\ship.h(1,1): warning C4828: 文件包含在偏移 0x139 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+  (编译源文件“main.cpp”)
+  
+G:\my\C-code\Space-War\Space-War\ship.h(1,1): warning C4828: 文件包含在偏移 0x13a 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+  (编译源文件“main.cpp”)
+  
+G:\my\C-code\Space-War\Space-War\ship.h(1,1): warning C4828: 文件包含在偏移 0x2aa 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+  (编译源文件“main.cpp”)
+  
+G:\my\C-code\Space-War\Space-War\ship.h(1,1): warning C4828: 文件包含在偏移 0x2ab 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+  (编译源文件“main.cpp”)
+  
+G:\my\C-code\Space-War\Space-War\ship.h(1,1): warning C4828: 文件包含在偏移 0x2ac 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+  (编译源文件“main.cpp”)
+  
+G:\my\C-code\Space-War\Space-War\ship.h(1,1): warning C4828: 文件包含在偏移 0x2ae 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+  (编译源文件“main.cpp”)
+  
+G:\my\C-code\Space-War\Space-War\ship.h(1,1): warning C4828: 文件包含在偏移 0x2af 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+  (编译源文件“main.cpp”)
+  
+G:\my\C-code\Space-War\Space-War\ship.h(1,1): warning C4828: 文件包含在偏移 0x324 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+  (编译源文件“main.cpp”)
+  
+G:\my\C-code\Space-War\Space-War\ship.h(1,1): warning C4828: 文件包含在偏移 0x325 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+  (编译源文件“main.cpp”)
+  
+G:\my\C-code\Space-War\Space-War\ship.h(1,1): warning C4828: 文件包含在偏移 0x326 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+  (编译源文件“main.cpp”)
+  
+G:\my\C-code\Space-War\Space-War\ship.h(1,1): warning C4828: 文件包含在偏移 0x327 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+  (编译源文件“main.cpp”)
+  
+G:\my\C-code\Space-War\Space-War\ship.h(1,1): warning C4828: 文件包含在偏移 0x32d 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+  (编译源文件“main.cpp”)
+  
+G:\my\C-code\Space-War\Space-War\ship.h(1,1): warning C4828: 文件包含在偏移 0x330 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+  (编译源文件“main.cpp”)
+  
+G:\my\C-code\Space-War\Space-War\ship.h(1,1): warning C4828: 文件包含在偏移 0x331 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+  (编译源文件“main.cpp”)
+  
+G:\my\C-code\Space-War\Space-War\ship.h(1,1): warning C4828: 文件包含在偏移 0x332 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+  (编译源文件“main.cpp”)
+  
+G:\my\C-code\Space-War\Space-War\ship.h(1,1): warning C4828: 文件包含在偏移 0x37a 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+  (编译源文件“main.cpp”)
+  
+G:\my\C-code\Space-War\Space-War\ship.h(1,1): warning C4828: 文件包含在偏移 0x37c 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+  (编译源文件“main.cpp”)
+  
+G:\my\C-code\Space-War\Space-War\ship.h(1,1): warning C4828: 文件包含在偏移 0x37d 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+  (编译源文件“main.cpp”)
+  
+G:\my\C-code\Space-War\Space-War\ship.h(1,1): warning C4828: 文件包含在偏移 0x383 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+  (编译源文件“main.cpp”)
+  
+G:\my\C-code\Space-War\Space-War\ship.h(1,1): warning C4828: 文件包含在偏移 0x386 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+  (编译源文件“main.cpp”)
+  
+G:\my\C-code\Space-War\Space-War\main.cpp(37,12): warning C4244: “参数”: 从“time_t”转换到“unsigned int”，可能丢失数据
+G:\my\C-code\Space-War\Space-War\main.cpp(89,19): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+G:\my\C-code\Space-War\Space-War\main.cpp(36,18): warning C4101: “Tend”: 未引用的局部变量
+G:\my\C-code\Space-War\Space-War\main.h(39,1): warning C4715: “GetSystemMemoryUsage”: 不是所有的控件路径都返回值
+  Space-War.vcxproj -> G:\my\C-code\Space-War\x64\Debug\Space-War.exe
