@@ -11,7 +11,7 @@
 #include <ship.h>
 #include <main.h>
 #pragma comment(lib,"msimg32.lib")
-//#pragma comment(linker, "/subsystem:\"windows\" /entry:\"mainCRTStartup\"")
+#pragma comment(linker, "/subsystem:\"windows\" /entry:\"mainCRTStartup\"")
 
 using namespace std;
 
