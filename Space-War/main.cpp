@@ -16,7 +16,6 @@
 
 using namespace std;
 
-
 int main() {
 	// 初始化
 	spdlog::info("Space War game starting");
