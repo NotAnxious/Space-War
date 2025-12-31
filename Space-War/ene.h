@@ -13,5 +13,11 @@ void RefreshENEPosit() {
 		eneY[i] += 1.0;
 	}
 }
+/*bool collisionDetection() {
+	for (int i = 0; i < eneY.size(); ++i) {
+		if (eneY[i] < ) {
+		}
+	}
+}*/
 
 #endif

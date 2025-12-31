@@ -22,6 +22,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="bullet.h" />
     <ClInclude Include="ene.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="resource.h" />
