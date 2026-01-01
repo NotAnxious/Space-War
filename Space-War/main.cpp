@@ -116,6 +116,11 @@ int main() {
 		}
 		showImage(NULL, shipX, cy - 204, &myShipPng);// 我方飞船(最前置)
 
+		// 随机生成敌机
+		if (getRand(1,60) == 1) {
+			addENE(getRand(0, cx - 400));
+		}
+
 		// 刷新坐标
 		RefreshShipPosit();
 		RefreshENEPosit();

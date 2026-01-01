@@ -4,8 +4,8 @@
 #include <vector>
 #include <main.h>
 using namespace std;
-vector<int> eneX = { 100,200 };
-vector<int> eneY = { 200,100 };
+vector<int> eneX = { 0 };
+vector<int> eneY = { 0 };
 IMAGE enePng;
 
 void RefreshENEPosit() {
@@ -14,14 +14,19 @@ void RefreshENEPosit() {
 	}
 }
 void eneOutOfScreenDetection(int sereenSize) {
-	for (int i = 0; i < eneY.size(); ++i) {
+	for (int i = static_cast<int>(eneY.size()) - 1; i >= 0; --i) {
 		if (eneY[i] >= sereenSize) {
-			// 删除越界的敌机
-			auto iter = eneY.erase(eneY.begin() + 1);
-			auto iter = eneX.erase(eneX.begin() + 1);
+			// 从末尾向前遍历并删除越界的敌机，避免索引失效与越界访问
+			eneY.erase(eneY.begin() + i);
+			eneX.erase(eneX.begin() + i);
 		}
 	}
 }
+void addENE(int xPos) {
+	eneX.push_back(xPos);
+	eneY.push_back(0);
+}
+
 /*bool collisionDetection() {
 	for (int i = 0; i < eneY.size(); ++i) {
 		if (eneY[i] < ) {
