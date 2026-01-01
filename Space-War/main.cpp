@@ -99,6 +99,10 @@ int main() {
 
 		BeginBatchDraw(); // 开始双缓冲
 		cleardevice(); // 清屏
+
+		// 按下esc键就退出
+		if (pressTheEsaKey()) { return 0; }
+
 		// 获取屏幕大小
 		const int cx = GetDeviceCaps(hdc, HORZRES);// 屏幕x轴长度
 		const int cy = GetDeviceCaps(hdc, VERTRES);// 屏幕y轴长度
@@ -112,11 +116,11 @@ int main() {
 		}
 		showImage(NULL, shipX, cy - 204, &myShipPng);// 我方飞船(最前置)
 
-		// 按下esc键就退出
-		if (pressTheEsaKey()) { return 0; }
 		// 刷新坐标
 		RefreshShipPosit();
 		RefreshENEPosit();
+		eneOutOfScreenDetection(cy);
+
 		// 防止飞船超出屏幕
 		if (shipX >= cx) { shipX = -125; }// 超过右边
 		if (shipX <= -126) { shipX = cx; }// 超过左边

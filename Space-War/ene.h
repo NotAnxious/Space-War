@@ -13,6 +13,15 @@ void RefreshENEPosit() {
 		eneY[i] += 1.0;
 	}
 }
+void eneOutOfScreenDetection(int sereenSize) {
+	for (int i = 0; i < eneY.size(); ++i) {
+		if (eneY[i] >= sereenSize) {
+			// 删除越界的敌机
+			auto iter = eneY.erase(eneY.begin() + 1);
+			auto iter = eneX.erase(eneX.begin() + 1);
+		}
+	}
+}
 /*bool collisionDetection() {
 	for (int i = 0; i < eneY.size(); ++i) {
 		if (eneY[i] < ) {
