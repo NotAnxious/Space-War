@@ -36,4 +36,7 @@ void RefreshShipPosit() {
 	shipX += shipRG;
 	shipX -= shipLG;
 }
+int returnShipX(){
+	return shipX;
+}
 #endif

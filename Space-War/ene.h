@@ -4,8 +4,8 @@
 #include <vector>
 #include <main.h>
 using namespace std;
-vector<int> eneX = { 0 };
-vector<int> eneY = { 0 };
+vector<int> eneX;
+vector<int> eneY;
 IMAGE enePng;
 
 void RefreshENEPosit() {

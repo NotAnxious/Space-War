@@ -1,25 +1,14 @@
 ﻿// 导入库文件
-#include <conio.h>
-#include <graphics.h>
-#include <spdlog.h>
-#include <iostream>
-#include <vector>
-#include <Windows.h>
-#include <cstdlib>
-#include <ctime>
-#include <chrono>
-#include <thread>
-#include <mmsystem.h>
 #include <ene.h>
 #include <ship.h>
 #include <main.h>
+#include <bullet.h>
 #pragma comment(lib,"msimg32.lib")
 #pragma comment(lib,"winmm.lib")
 //#pragma comment(linker, "/subsystem:\"windows\" /entry:\"mainCRTStartup\"")// 不显示终端窗口
 
-#define KEY_DOWN(VK_NONAME) ((GetAsyncKeyState(VK_NONAME) & 0x8000) ? 1 : 0)
 // 切换渲染模式：1 = 使用 EasyX BeginBatchDraw/EndBatchDraw（原来的双缓冲）
-//                  0 = 关闭 Begin/End，直接即时绘制（可能闪烁，但用于排查）
+//               0 = 关闭 Begin/End，直接即时绘制（可能闪烁，但用于排查）
 #define USE_EASYX_BATCH 0
 
 using namespace std;
@@ -71,6 +60,7 @@ int main() {
 	loadimage(&starrySkyPng, _T("png/starry-sky/starry-sky.png"));
 	loadimage(&LPortalPng, _T("png/portal/left-portal.png"));
 	loadimage(&RPortalPng, _T("png/portal/right-portal.png"));
+	loadimage(&bulletPng, _T("png/bullet/bullet.png"));
 	loadimage(&enePng, _T("png/spaceship_2/spaceship.png"));
 
 	// 创建窗口
@@ -94,6 +84,8 @@ int main() {
 	// 运行主循环
 	spdlog::info("Entering main game loop");
 	while (true) {
+
+		cout << bulletX.size()<<endl;
 		// 本帧计时开始
 		auto frameStart = chrono::steady_clock::now();
 
@@ -111,8 +103,13 @@ int main() {
 		showImage(NULL, 0, 0, &starrySkyPng);// 星空背景(最后置)
 		showImage(NULL, 0, cy - 217, &LPortalPng);// 左传送门
 		showImage(NULL, cx - 150, cy - 217, &RPortalPng);// 右传送门
+		// 显示敌机
 		for (int i = 0; i < eneX.size(); ++i) {
 			showImage(NULL, eneX[i], eneY[i], &enePng);
+		}
+		// 显示子弹
+		for (int i = 0; i < bulletX.size(); ++i) {
+			showImage(NULL, bulletX[i], bulletY[i], &bulletPng);
 		}
 		showImage(NULL, shipX, cy - 204, &myShipPng);// 我方飞船(最前置)
 
@@ -120,6 +117,7 @@ int main() {
 		if (getRand(1,60) == 1) {
 			addENE(getRand(0, cx - 400));
 		}
+		createbullet(returnShipX(), cy - 204);// 创建子弹
 
 		// 刷新坐标
 		RefreshShipPosit();
