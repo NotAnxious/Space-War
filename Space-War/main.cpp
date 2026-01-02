@@ -1,11 +1,11 @@
 ﻿// 导入库文件
-#include <ene.h>
-#include <ship.h>
-#include <main.h>
-#include <bullet.h>
+#include "ene.h"
+#include "ship.h"
+#include "main.h"
+#include "bullet.h"
 #pragma comment(lib,"msimg32.lib")
 #pragma comment(lib,"winmm.lib")
-//#pragma comment(linker, "/subsystem:\"windows\" /entry:\"mainCRTStartup\"")// 不显示终端窗口
+#pragma comment(linker, "/subsystem:\"windows\" /entry:\"mainCRTStartup\"")// 不显示终端窗口
 
 // 切换渲染模式：1 = 使用 EasyX BeginBatchDraw/EndBatchDraw（原来的双缓冲）
 //               0 = 关闭 Begin/End，直接即时绘制（可能闪烁，但用于排查）
@@ -35,6 +35,8 @@ int main() {
 	}
 	// 初始化变量
 	HDC hdc = GetDC(NULL);
+	TCHAR cscore[32] = _T("");
+	
 	srand((unsigned)time(0));// 初始化时间种子方便生成随机数
 
 	// 帧率控制参数（目标 FPS，可按需修改）
@@ -49,6 +51,13 @@ int main() {
 	HWND gameHWND = FindWindow(NULL, L"Space-War");// 获取游戏窗口句柄
 	HICON icon = ExtractIcon(NULL, L"png/icon.ico", 0);// 获取窗口图标
 	SendMessage(gameHWND, WM_SETTEXT, NULL, (LPARAM)icon);
+	int rW = GetSystemMetrics(SM_CXSCREEN); // 屏幕宽度 像素
+	int rH = GetSystemMetrics(SM_CYSCREEN); // 屏幕高度 像素
+	spdlog::info("Screen resolution: {0}x{1}", rW, rH);
+	HWND hwnd = initgraph(rW, rH); // 初始化窗口并获取窗口句柄
+	settextcolor(WHITE); // 设置文字颜色为红色
+	settextstyle(25, 0,_T("宋体")); // 设置文字样式为25号宋体
+	spdlog::info("Game window initialized successfully");
 
 	// 预加载图片
 	spdlog::info("images loading");
@@ -66,12 +75,6 @@ int main() {
 	// 创建窗口
 	spdlog::info("Creating game window");
 
-	int rW = GetSystemMetrics(SM_CXSCREEN); // 屏幕宽度 像素
-	int rH = GetSystemMetrics(SM_CYSCREEN); // 屏幕高度 像素
-	spdlog::info("Screen resolution: {0}x{1}", rW, rH);
-	HWND hwnd = initgraph(rW, rH); // 初始化窗口并获取窗口句柄
-	spdlog::info("Game window initialized successfully");
-
 	// 初始化窗口
 	const LONG l_WinStyle = GetWindowLong(hwnd, GWL_STYLE); // 获取窗口信息
 	// 设置窗口信息 最大化 取消标题栏及边框
@@ -84,7 +87,6 @@ int main() {
 	// 运行主循环
 	spdlog::info("Entering main game loop");
 	while (true) {
-
 		// 本帧计时开始
 		auto frameStart = chrono::steady_clock::now();
 
@@ -110,7 +112,9 @@ int main() {
 		for (int i = 0; i < bulletX.size(); ++i) {
 			showImage(NULL, bulletX[i], bulletY[i], &bulletPng);
 		}
-		showImage(NULL, shipX, cy - 204, &myShipPng);// 我方飞船(最前置)
+		showImage(NULL, shipX, cy - 204, &myShipPng);// 我方飞船
+		_stprintf_s(cscore, sizeof(cscore) / sizeof(TCHAR), _T("%d"), score);
+		outtextxy(100, 100, cscore);// 显示分数文字
 
 		// 随机生成敌机
 		if (getRand(1,60) == 1) {

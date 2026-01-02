@@ -2,7 +2,7 @@
 #define ENE_H
 
 #include <vector>
-#include <main.h>
+#include "main.h"
 using namespace std;
 vector<int> eneX;
 vector<int> eneY;

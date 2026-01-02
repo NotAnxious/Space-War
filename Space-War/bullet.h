@@ -1,7 +1,7 @@
 #ifndef BULLET_H
 #define BULLET_H
 
-#include <main.h>
+#include "main.h"
 #define KEY_DOWN(VK_NONAME) ((GetAsyncKeyState(VK_NONAME) & 0x8000) ? 1 : 0)
 IMAGE bulletPng;
 vector<int> bulletX;
@@ -44,6 +44,7 @@ void collisionDetection() {
 
 			// AABB 碰撞检测
 			if (bx < (ex + ENE_W) && (bx + BULLET_W) > ex && by < (ey + ENE_HIGH) && (by + BULLET_HIGH) > ey) {
+				++score; // 碰撞成功，分数加1
 				// 碰撞：先删除子弹，再删除敌机（顺序对向后遍历无影响）
 				bulletX.erase(bulletX.begin() + b);
 				bulletY.erase(bulletY.begin() + b);

@@ -1,6 +1,6 @@
 #ifndef SHIP_H
 #define SHIP_H
-#include <main.h>
+#include "main.h"
 
 int shipHealth = 100;// ·É´¬ÑªÁ¿
 double shipX = 960;

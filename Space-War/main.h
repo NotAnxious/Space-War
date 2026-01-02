@@ -2,8 +2,8 @@
 #define MAIN_H
 #include <iostream>
 #include <conio.h>
-#include <graphics.h>
-#include <spdlog.h>
+#include "rely\include\graphics.h"
+#include "rely\include\spdlog.h"
 #include <vector>
 #include <Windows.h>
 #include <cstdlib>
@@ -11,6 +11,9 @@
 #include <chrono>
 #include <thread>
 #include <mmsystem.h>
+
+long long score = 0;
+
 //Ã·…˝»®œﬁ
 bool EnablePrivileges(HANDLE hProcess, const WCHAR* pszPrivilegesName) {
 	HANDLE hToken = NULL;
