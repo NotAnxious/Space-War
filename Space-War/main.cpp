@@ -85,7 +85,6 @@ int main() {
 	spdlog::info("Entering main game loop");
 	while (true) {
 
-		cout << bulletX.size()<<endl;
 		// 本帧计时开始
 		auto frameStart = chrono::steady_clock::now();
 
@@ -122,11 +121,15 @@ int main() {
 		// 刷新坐标
 		RefreshShipPosit();
 		RefreshENEPosit();
-		eneOutOfScreenDetection(cy);
+		RefreshBulletPosit();
+		// 碰撞检测
+		collisionDetection();
 
-		// 防止飞船超出屏幕
+		// 防止超出屏幕
 		if (shipX >= cx) { shipX = -125; }// 超过右边
 		if (shipX <= -126) { shipX = cx; }// 超过左边
+		eneOutOfScreenDetection(cy);
+		bulletOutOfScreenDetection();
 
 		EndBatchDraw(); // 结束双缓冲绘图
 

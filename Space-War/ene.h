@@ -27,11 +27,5 @@ void addENE(int xPos) {
 	eneY.push_back(0);
 }
 
-/*bool collisionDetection() {
-	for (int i = 0; i < eneY.size(); ++i) {
-		if (eneY[i] < ) {
-		}
-	}
-}*/
 
 #endif
