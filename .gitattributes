@@ -1,0 +1,5 @@
+.vs/Space-War/v18/ipch/AutoPCH/b78c5026811a85bb/MAIN.ipch filter=lfs diff=lfs merge=lfs -text
+.vs/Space-War/v18/ipch/AutoPCH/8c5a440e25dce2b6/PATTERN_FORMATTER-INL.ipch filter=lfs diff=lfs merge=lfs -text
+*.ipch filter=lfs diff=lfs merge=lfs -text
+*.db filter=lfs diff=lfs merge=lfs -text
+.vs/** filter=lfs diff=lfs merge=lfs -text
