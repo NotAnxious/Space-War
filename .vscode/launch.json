@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "g:/my/C-code/Space-War/Space-War/src",
-      "program": "g:/my/C-code/Space-War/Space-War/src/build/Debug/outDebug",
+      "cwd": "g:/my/C-code/Space-War/Space-War",
+      "program": "g:/my/C-code/Space-War/Space-War/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
