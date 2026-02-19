@@ -2,18 +2,20 @@
 #define MAIN_H
 #include <iostream>
 #include <conio.h>
-#include "rely\include\spdlog.h"
+
+// å®šä¹‰GLFW_INCLUDE_NONEï¼Œè¿™æ ·GLFWå°±ä¸ä¼šåŒ…å«OpenGLçš„å¤´æ–‡ä»¶ï¼Œé¿å…ä¸glad.hå†²çª
+#define GLFW_INCLUDE_NONE
+#include "include\GLFW\glfw3.h"
+#include "include\glm\glm.hpp"
+#include "include\opencv2\opencv.hpp"
+#include "include\SOIL2\SOIL2.h"
+#include "include\spdlog\spdlog.h"
 #include <vector>
 #include <Windows.h>
-#include <cstdlib>
-#include <ctime>
-#include <chrono>
-#include <thread>
-#include <mmsystem.h>
 
 long long score = 0;
 
-//ÌáÉıÈ¨ÏŞ
+//ï¿½ï¿½ï¿½ï¿½È¨ï¿½ï¿½
 bool EnablePrivileges(HANDLE hProcess, const WCHAR* pszPrivilegesName) {
 	HANDLE hToken = NULL;
 	LUID luidValue;
@@ -43,7 +45,7 @@ bool GetSystemMemoryUsage() {
 		spdlog::info("Memory: {0}MB / {1}MB(%{2})", memInfo.ullTotalPhys / (1024 * 1024)
 			, memInfo.ullAvailPhys / (1024 * 1024)
 			, memInfo.dwMemoryLoad);
-		// ÅĞ¶ÏÄÚ´æÊÇ·ñ¹»ÓÃ
+		// ï¿½Ğ¶ï¿½ï¿½Ú´ï¿½ï¿½Ç·ï¿½ï¿½ï¿½
 		return (memInfo.ullTotalPhys / (1024 * 1024) - memInfo.ullAvailPhys / (1024 * 1024) >= 19) ? true:false ;
 	}
 	else {
@@ -51,7 +53,7 @@ bool GetSystemMemoryUsage() {
 	}
 }
 
-// »ñÈ¡CPUĞÅÏ¢
+// ï¿½ï¿½È¡CPUï¿½ï¿½Ï¢
 void GetCpuInfo() {
 	int cpuInfo[4] = { -1 };
 	char cpuBrand[0x40] = { 0 };
@@ -64,27 +66,5 @@ void GetCpuInfo() {
 	memcpy(cpuBrand + 32, cpuInfo, sizeof(cpuInfo));
 
 	spdlog::info("CPU:{}", cpuBrand);
-}
-void showImage(IMAGE* dstimg, int x, int y, IMAGE* srcimg) {
-	HDC dstDC = GetImageHDC(dstimg);
-	HDC srcDC = GetImageHDC(srcimg);
-	int w = srcimg->getwidth();
-	int h = srcimg->getheight();
-	BLENDFUNCTION bf = { AC_SRC_OVER ,0,255,AC_SRC_ALPHA };
-	AlphaBlend(dstDC, x, y, w, h, srcDC, 0, 0, w, h, bf);
-}
-bool pressTheEsaKey() {
-	bool isPressed = (GetAsyncKeyState(VK_ESCAPE) & 0x8000) != 0; // Esc¼ü
-	if (isPressed) {
-		spdlog::info("Escape key pressed, exiting game");
-	}
-	return isPressed;
-}
-bool pressTheDKey() {
-	return (GetAsyncKeyState(0x44) & 0x8000) != 0; // D¼ü
-}
-
-bool pressTheAKey() {
-	return (GetAsyncKeyState(0X41) & 0x8000) != 0; // A¼ü
 }
 #endif
