@@ -1,0 +1,55 @@
+﻿  main.cpp
+G:\my\C-code\Space-War\Space-War\src\include\glm\core\type_half.inl(1,1): warning C4828: 文件包含在偏移 0x752 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+  (编译源文件“src/main.cpp”)
+  
+G:\my\C-code\Space-War\Space-War\src\include\glm\core\func_common.hpp(1,1): warning C4828: 文件包含在偏移 0x30f8 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+  (编译源文件“src/main.cpp”)
+  
+G:\my\C-code\Space-War\Space-War\src\include\glm\core\func_common.hpp(1,1): warning C4828: 文件包含在偏移 0x310a 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+  (编译源文件“src/main.cpp”)
+  
+G:\my\C-code\Space-War\Space-War\src\include\glm\core\func_common.hpp(1,1): warning C4828: 文件包含在偏移 0x3132 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+  (编译源文件“src/main.cpp”)
+  
+G:\my\C-code\Space-War\Space-War\src\include\glm\core\func_common.inl(1,1): warning C4828: 文件包含在偏移 0x1ce2 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+  (编译源文件“src/main.cpp”)
+  
+G:\my\C-code\Space-War\Space-War\src\include\glm\core\func_integer.hpp(1,1): warning C4828: 文件包含在偏移 0x1347 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+  (编译源文件“src/main.cpp”)
+  
+G:\my\C-code\Space-War\Space-War\src\include\glm\core\func_integer.hpp(1,1): warning C4828: 文件包含在偏移 0x16b9 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+  (编译源文件“src/main.cpp”)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\minwindef.h(130,9): warning C4005: “APIENTRY”: 宏重定义
+  (编译源文件“src/main.cpp”)
+      G:\my\C-code\Space-War\Space-War\src\include\GLFW\glfw3.h(123,11):
+      参见“APIENTRY”的前一个定义
+  
+G:\my\C-code\Space-War\Space-War\src\ship.h(54,9): warning C4244: “return”: 从“double”转换到“int”，可能丢失数据
+  (编译源文件“src/main.cpp”)
+  
+G:\my\C-code\Space-War\Space-War\src\image.h(63,16): warning C4244: “参数”: 从“int”转换到“GLfloat”，可能丢失数据
+  (编译源文件“src/main.cpp”)
+  
+G:\my\C-code\Space-War\Space-War\src\image.h(63,13): warning C4244: “参数”: 从“int”转换到“GLfloat”，可能丢失数据
+  (编译源文件“src/main.cpp”)
+  
+G:\my\C-code\Space-War\Space-War\src\image.h(66,24): warning C4244: “参数”: 从“int”转换到“GLfloat”，可能丢失数据
+  (编译源文件“src/main.cpp”)
+  
+G:\my\C-code\Space-War\Space-War\src\image.h(72,13): warning C4244: “参数”: 从“int”转换到“GLfloat”，可能丢失数据
+  (编译源文件“src/main.cpp”)
+  
+G:\my\C-code\Space-War\Space-War\src\main.cpp(120,10): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+soil2-debug.lib(SOIL2.obj) : warning LNK4075: 忽略“/EDITANDCONTINUE”(由于“/OPT:ICF”规范)
+LINK : warning LNK4098: 默认库“MSVCRTD”与其他库的使用冲突；请使用 /NODEFAULTLIB:library
+  正在生成代码
+  2 of 4178 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    2 functions had inline decision re-evaluated but remain unchanged
+  已完成代码的生成
+soil2-debug.lib(SOIL2.obj) : warning LNK4099: 未找到 PDB“soil2-debug.pdb”(使用“soil2-debug.lib(SOIL2.obj)”或在“G:\my\C-code\Space-War\x64\Release\soil2-debug.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+soil2-debug.lib(image_DXT.obj) : warning LNK4099: 未找到 PDB“soil2-debug.pdb”(使用“soil2-debug.lib(image_DXT.obj)”或在“G:\my\C-code\Space-War\x64\Release\soil2-debug.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+soil2-debug.lib(wfETC.obj) : warning LNK4099: 未找到 PDB“soil2-debug.pdb”(使用“soil2-debug.lib(wfETC.obj)”或在“G:\my\C-code\Space-War\x64\Release\soil2-debug.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+soil2-debug.lib(image_helper.obj) : warning LNK4099: 未找到 PDB“soil2-debug.pdb”(使用“soil2-debug.lib(image_helper.obj)”或在“G:\my\C-code\Space-War\x64\Release\soil2-debug.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+  Space-War.vcxproj -> G:\my\C-code\Space-War\x64\Release\Space-War.exe

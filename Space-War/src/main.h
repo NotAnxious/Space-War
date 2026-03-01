@@ -1,3 +1,5 @@
+// main.h
+
 #ifndef MAIN_H
 #define MAIN_H
 #include <iostream>
@@ -6,34 +8,20 @@
 // 定义GLFW_INCLUDE_NONE，这样GLFW就不会包含OpenGL的头文件，避免与glad.h冲突
 #define GLFW_INCLUDE_NONE
 #include "include\GLFW\glfw3.h"
+#include "include\glad.h"
 #include "include\glm\glm.hpp"
 #include "include\opencv2\opencv.hpp"
 #include "include\SOIL2\SOIL2.h"
 #include "include\spdlog\spdlog.h"
 #include <vector>
 #include <Windows.h>
+#define KEY_DOWN(VK_NONAME) ((GetAsyncKeyState(VK_NONAME) & 0x8000) ? 1:0)
 
 long long score = 0;
 
 // 全局变量
 GLFWwindow* window;
 int screenWidth, screenHeight;
-
-// 纹理结构体
-struct Texture {
-	GLuint id;
-	int width;
-	int height;
-};
-
-// 定义多个纹理
-extern Texture spaceshipTexture;
-extern Texture spaceship2Texture;
-extern Texture bulletTexture;
-extern Texture bigBossTexture;
-extern Texture starrySkyTexture;
-extern Texture leftPortalTexture;
-extern Texture rightPortalTexture;
 
 // handle权限提升函数
 bool EnablePrivileges(HANDLE hProcess, const WCHAR* pszPrivilegesName) {
@@ -67,10 +55,13 @@ bool GetSystemMemoryUsage() {
 		spdlog::info("Memory: {0}MB / {1}MB(%{2})", memInfo.ullTotalPhys / (1024 * 1024)
 			, memInfo.ullAvailPhys / (1024 * 1024)
 			, memInfo.dwMemoryLoad);
-		return (memInfo.ullTotalPhys / (1024 * 1024) - memInfo.ullAvailPhys / (1024 * 1024) >= 19) ? true:false ;
+		long long usedMB = memInfo.ullTotalPhys / (1024 * 1024) - memInfo.ullAvailPhys / (1024 * 1024);
+		spdlog::info("Used memory: {0}MB", usedMB);
+		return true;
 	}
 	else {
 		spdlog::error("Unable to retrieve system memory information");
+		return true;
 	}
 }
 
@@ -110,23 +101,63 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
 
 // 初始化函数
 bool init() {
+	spdlog::info("Checking graphics card...");
+	
+	// 检测显卡
+	HDC hdc = GetDC(NULL);
+	if (hdc == NULL) {
+		spdlog::error("你连个显卡都没有玩啥游戏啊(you isn't have any graphics card)");
+		spdlog::info("Press any key to exit...");
+		_getch();
+		return false;
+	}
+	
+	// 检查颜色深度
+	int colorDepth = GetDeviceCaps(hdc, BITSPIXEL);
+	spdlog::info("Color depth: {0} bits", colorDepth);
+	ReleaseDC(NULL, hdc);
+	
+	// 尝试加载 OpenGL32.dll
+	HMODULE opengl32 = LoadLibraryA("opengl32.dll");
+	if (opengl32 == NULL) {
+		spdlog::error("OpenGL not supported (opengl32.dll not found)!");
+		spdlog::info("This program requires OpenGL support.");
+		spdlog::info("Press any key to exit...");
+		_getch();
+		return false;
+	}
+	FreeLibrary(opengl32);
+	spdlog::info("OpenGL support detected");
+	
+	spdlog::info("Getting CPU info...");
 	GetCpuInfo();
+	
+	spdlog::info("Enabling privileges...");
 	EnablePrivileges(GetCurrentProcess(), SE_DEBUG_NAME);
+	
 	// 检查系统内存使用情况
+	spdlog::info("Checking memory usage...");
 	if (!GetSystemMemoryUsage()) {
+		spdlog::error("Memory check failed!");
 		return false;
 	}
 
 	// 初始化GLFW
+	spdlog::info("Initializing GLFW...");
 	if (!glfwInit()) {
 		spdlog::error("Failed to initialize GLFW");
+		spdlog::info("Press any key to exit...");
+		_getch();
 		return false;
 	}
+	spdlog::info("GLFW initialized successfully!");
+	
 	// 使用立即模式
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
 
 	// 获取主显示器
+	spdlog::info("Getting primary monitor...");
 	GLFWmonitor* monitor = glfwGetPrimaryMonitor();
 	if (!monitor) {
 		spdlog::error("Failed to get primary monitor");
@@ -135,6 +166,7 @@ bool init() {
 	}
 
 	// 获取显示器视频模式
+	spdlog::info("Getting video mode...");
 	const GLFWvidmode* mode = glfwGetVideoMode(monitor);
 	if (!mode) {
 		spdlog::error("Failed to get video mode");
@@ -145,17 +177,29 @@ bool init() {
 	// 存储屏幕尺寸
 	screenWidth = mode->width;
 	screenHeight = mode->height;
+	spdlog::info("Screen size: {0}x{1}", screenWidth, screenHeight);
 
 	// 创建全屏窗口
+	spdlog::info("Creating fullscreen window...");
 	window = glfwCreateWindow(screenWidth, screenHeight, "Immediate Mode Image Display", monitor, NULL);
 	if (!window) {
 		spdlog::error("Failed to create window");
 		glfwTerminate();
 		return false;
 	}
+	spdlog::info("Window created successfully!");
 
 	// 设置当前上下文
 	glfwMakeContextCurrent(window);
+
+	// 初始化GLAD（加载OpenGL函数指针）
+	spdlog::info("Initializing GLAD...");
+	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
+		spdlog::error("Failed to initialize GLAD");
+		glfwTerminate();
+		return false;
+	}
+	spdlog::info("GLAD initialized successfully!");
 
 	// 注册窗口大小变化回调
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
