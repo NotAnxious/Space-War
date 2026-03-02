@@ -50,7 +50,4 @@ void RefreshShipPosit(double deltaTime) {
 	// 应用速度到位置
 	shipX += shipG * shipTimeScale;
 }
-int returnShipX(){
-	return shipX;
-}
 #endif
