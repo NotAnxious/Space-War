@@ -39,6 +39,7 @@ cd Space-War
 ### 2. 安装依赖
 
 项目依赖以下库：
+
 - GLEW
 - GLAD
 - GLFW
@@ -60,20 +61,22 @@ Space-War.sln
 
 ## 🎮 游戏控制
 
-| 按键 | 功能 |
-|------|------|
+| 按键  | 功能   |
+| --- | ---- |
 | A/D | 飞船移动 |
-| 空格键 | 射击 |
+| 空格键 | 射击   |
 | ESC | 退出游戏 |
 
 ## ⚙️ 游戏机制
 
 ### 敌人系统
+
 - 每秒钟有 50% 的概率生成敌方飞船
 - 敌方飞船从屏幕顶部向下移动
 - 当敌方飞船飞出屏幕底部时会被自动删除
 
 ### 碰撞检测
+
 - 玩家飞船与敌方飞船的碰撞
 - 子弹与敌方飞船的碰撞
 
@@ -113,6 +116,7 @@ Space-War.exe
 本项目采用 MIT 许可证。详见 LICENSE 文件。
 
 ## 🤝 贡献
+
 我们欢迎所有形式的贡献，包括但不限于：
 
 - 报告 bug
@@ -140,9 +144,8 @@ Space-War.exe
 ## 📧 联系作者
 
 - GitHub: [NotAnxious](https://github.com/NotAnxious)
-- Email: jinlu920@163.com
 
-##  🙏 鸣谢
+## 🙏 鸣谢
 
 - [GLFW](https://www.glfw.org/) - 用于创建窗口和处理输入
 - [GLEW](http://glew.sourceforge.net/) - 用于加载 OpenGL 扩展
@@ -156,8 +159,10 @@ Space-War.exe
 - [Trae CN](https://www.trae.cn/) - 帮我修了好多BUG
 
 ## ⚠️ 注意事项
+
 部分图片素材来源于AI生成，仅供学习和参考。
 
----
+***
+
 make with NotAnxious
 如果觉得项目有用，请给个 🌟 吧！

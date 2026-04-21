@@ -1,53 +1,63 @@
-// ship.h
+// Ship.h
 
 #ifndef SHIP_H
 #define SHIP_H
-#include "main.h"
 
-// 速度系数，控制飞船移动速度
-const double shipSpeedFactor = 50.0; // 每秒移动的像素数
-// 计算时间缩放因子
-double shipTimeScale;
-// 方向,true=左;false=右
-bool dire = false;
+#include "Texture.h"
+#include "Utils.h"
 
-int shipHealth = 100; // 飞船血量
-double shipX = 960; // X坐标
-double shipG = 0; // 速度
+const double SHIP_SPEED_FACTOR = 50.0;
 
+class Ship {
+public:
+	Ship(double startX, double scrWidth)
+		: x(startX), velocity(0.0), screenWidth(scrWidth), directionLeft(false) {}
+	void update(double deltaTime);
+	void render();
+	double getX() const { return x; }
+	Texture texture;
 
-void SwitchInputMethod() {
-	HWND hwnd = GetForegroundWindow();
-	HKL englishHKL = LoadKeyboardLayout(L"00000409", KLF_ACTIVATE); // 切换输入法
+	const int shipImageWidth = 174;
+	const int shipImageHeight = 228;
 
-	if (englishHKL) {
-		PostMessage(hwnd, WM_INPUTLANGCHANGEREQUEST, 0, (LPARAM)englishHKL);
-		spdlog::info("Switched to US Keyboard (English)");
+private:
+	double x;
+	double velocity;
+	double screenWidth;
+	bool directionLeft;
+};
+
+inline void Ship::update(double deltaTime) {
+	double timeScale = deltaTime * SHIP_SPEED_FACTOR;
+
+	if (KEY_DOWN('A')) { directionLeft = true; }
+	if (KEY_DOWN('D')) { directionLeft = false; }
+
+	if (directionLeft) {
+		velocity -= 100.0 * timeScale;
 	}
 	else {
-		spdlog::error("Failed to load English keyboard layout");
+		velocity += 100.0 * timeScale;
 	}
-} 
 
-long getRand(long randmin, long randmax) {
-	return (rand() % (randmax - randmin + 1)) + randmin;
-}
-void RefreshShipPosit(double deltaTime) {
-	// 计算时间缩放因子
-	shipTimeScale = deltaTime * shipSpeedFactor;
-	
-	// 按键判断
-	if (KEY_DOWN('A')) { dire = true; }
-	if (KEY_DOWN('D')) { dire = false; }
+	x += velocity * timeScale;
 
-	// 左右移动
-	if (dire) {
-		shipG -= 1 * shipTimeScale;
-	}
-	else if (!dire) {
-		shipG += 1 * shipTimeScale;
-	}
-	// 应用速度到位置
-	shipX += shipG * shipTimeScale;
+	if (x > screenWidth) { x = -shipImageWidth; }
+	if (x < -shipImageWidth) { x = screenWidth; }
 }
+
+inline void Ship::render() {
+	glBindTexture(GL_TEXTURE_2D, texture.id);
+	glBegin(GL_QUADS);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex2f(static_cast<float>(x), 0.0f);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex2f(static_cast<float>(x) + texture.width * 1.0f, 0.0f);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex2f(static_cast<float>(x) + texture.width * 1.0f, texture.height * 1.0f);
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex2f(static_cast<float>(x), texture.height * 1.0f);
+	glEnd();
+}
+
 #endif

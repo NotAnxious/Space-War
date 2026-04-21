@@ -1,6 +1,6 @@
-//{{NO_DEPENDENCIES}}
-// Microsoft Visual C++ ���ɵİ����ļ���
-// �� Space-War.rc ʹ��
+﻿//{{NO_DEPENDENCIES}}
+// Microsoft Visual C++ 生成的包含文件。
+// 供 Space-War.rc 使用
 //
 #define IDI_ICON2                       102
 

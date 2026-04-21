@@ -21,6 +21,9 @@
     <ClCompile Include="src\glad.c">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="src\gpu_collision.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\bullet.h">
@@ -41,6 +44,9 @@
     <ClInclude Include="src\image.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="src\gpu_collision.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="src\Space-War.rc">
@@ -51,12 +57,8 @@
     <Image Include="..\x64\Debug\png\icon.ico">
       <Filter>资源文件</Filter>
     </Image>
-    <Image Include="icon1.ico">
-      <Filter>资源文件</Filter>
-    </Image>
   </ItemGroup>
   <ItemGroup>
     <None Include="src\Space-War.aps" />
-    <None Include="settings.json" />
   </ItemGroup>
 </Project>

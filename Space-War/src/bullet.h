@@ -1,62 +1,112 @@
+// Bullet.h
+
 #ifndef BULLET_H
 #define BULLET_H
 
-#include "main.h"
-#define KEY_DOWN(VK_NONAME) ((GetAsyncKeyState(VK_NONAME) & 0x8000) ? 1 : 0)
-IMAGE bulletPng;
-vector<int> bulletX;
-vector<int> bulletY;
-// 碰撞箱常量（便于调整与统一管理）
-static const int ENE_W = 400;
-static const int ENE_HIGH = 242;
-static const int BULLET_W = 64;
-static const int BULLET_HIGH = 322;
+#include "Utils.h"
+#include "Enemy.h"
+#include <vector>
 
-void createbullet(int x, int y) {
-	if (KEY_DOWN(VK_LBUTTON)) {
-		bulletX.push_back(x);
-		bulletY.push_back(y - 322);
+struct Bullet {
+	double x;
+	double y;
+};
+
+class BulletManager {
+public:
+	BulletManager() : bulletSpeed(5.0), lastFireTime(0.0) {}
+
+	void update();
+	void fire(double shipX);
+	void removeBullet(int index);
+	void render();
+
+	int checkCollisions(EnemyManager* enemyManager);
+
+	int getCount() const { return static_cast<int>(bullets.size()); }
+	Bullet getBullet(int index) const { return bullets[index]; }
+
+	static const int BULLET_WIDTH = 64;
+	static const int BULLET_HEIGHT = 322;
+
+private:
+	std::vector<Bullet> bullets;
+	double bulletSpeed;
+	double lastFireTime;
+};
+
+inline void BulletManager::update() {
+	for (auto& bullet : bullets) {
+		bullet.y -= bulletSpeed;
 	}
-}
-void RefreshBulletPosit() {
-	for (int i = 0; i < bulletY.size(); ++i) {
-		bulletY[i] -= 5.0;
-	}
-}
-void bulletOutOfScreenDetection() {
-	for (int i = static_cast<int>(bulletY.size()) - 1; i >= 0; --i) {
-		if (bulletY[i] <= -322) {
-			// 从末尾向前遍历并删除越界的子弹，避免索引失效与越界访问
-			bulletY.erase(bulletY.begin() + i);
-			bulletX.erase(bulletX.begin() + i);
+
+	for (int i = static_cast<int>(bullets.size()) - 1; i >= 0; --i) {
+		if (bullets[i].y <= -BULLET_HEIGHT) {
+			bullets.erase(bullets.begin() + i);
 		}
 	}
 }
-void collisionDetection() {
 
-	// 从后向前遍历，删除元素时不会影响尚未处理的索引，避免越界
-	for (int c = static_cast<int>(eneY.size()) - 1; c >= 0; --c) {
-		for (int b = static_cast<int>(bulletY.size()) - 1; b >= 0; --b) {
-			int bx = bulletX[b];
-			int by = bulletY[b];
-			int ex = eneX[c];
-			int ey = eneY[c];
+inline void BulletManager::fire(double shipX) {
+	double currentTime = glfwGetTime();
+	if (KEY_DOWN(VK_LBUTTON) && currentTime - lastFireTime >= 0.1) {
+		bullets.push_back({ shipX + 100.0, -322.0 });
+		lastFireTime = currentTime;
+	}
+}
 
-			// AABB 碰撞检测
-			if (bx < (ex + ENE_W) && (bx + BULLET_W) > ex && by < (ey + ENE_HIGH) && (by + BULLET_HIGH) > ey) {
-				++score; // 碰撞成功，分数加1
-				// 碰撞：先删除子弹，再删除敌机（顺序对向后遍历无影响）
-				bulletX.erase(bulletX.begin() + b);
-				bulletY.erase(bulletY.begin() + b);
+inline void BulletManager::removeBullet(int index) {
+	if (index >= 0 && index < static_cast<int>(bullets.size())) {
+		bullets.erase(bullets.begin() + index);
+	}
+}
 
-				eneX.erase(eneX.begin() + c);
-				eneY.erase(eneY.begin() + c);
+inline void BulletManager::render() {
+	glColor3f(1.0f, 0.0f, 0.0f); // 绾㈣壊瀛愬脊
+	glBegin(GL_QUADS);
 
-				// 敌机已被删除，跳出内层循环，进入下一个敌机
+	for (const auto& bullet : bullets) {
+		float x = static_cast<float>(bullet.x);
+		float y = static_cast<float>(bullet.y);
+		float width = BULLET_WIDTH * 1.0f;
+		float height = BULLET_HEIGHT * 1.0f;
+
+		glVertex2f(x, y);
+		glVertex2f(x + width, y);
+		glVertex2f(x + width, y + height);
+		glVertex2f(x, y + height);
+	}
+	glEnd();
+	glColor3f(1.0f, 1.0f, 1.0f); // 鎭㈠鐧借壊
+}
+
+inline int BulletManager::checkCollisions(EnemyManager* enemyManager) {
+	int score = 0;
+
+	for (int b = static_cast<int>(bullets.size()) - 1; b >= 0; --b) {
+		for (int e = static_cast<int>(enemyManager->getCount()) - 1; e >= 0; --e) {
+			const Enemy& enemy = enemyManager->getEnemy(e);
+			const Bullet& bullet = bullets[b];
+
+			double bx = bullet.x;
+			double by = bullet.y;
+			double ex = enemy.x;
+			double ey = enemy.y;
+
+			if (bx < (ex + EnemyManager::ENEMY_WIDTH) &&
+				(bx + BULLET_WIDTH) > ex &&
+				by < (ey + EnemyManager::ENEMY_HEIGHT) &&
+				(by + BULLET_HEIGHT) > ey) {
+
+				++score;
+				removeBullet(b);
+				enemyManager->removeEnemy(e);
 				break;
 			}
 		}
 	}
+
+	return score;
 }
 
 #endif

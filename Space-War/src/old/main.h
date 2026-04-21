@@ -1,0 +1,232 @@
+// main.h
+
+#ifndef MAIN_H
+#define MAIN_H
+#include <iostream>
+#include <conio.h>
+
+// 定义GLFW_INCLUDE_NONE，这样GLFW就不会包含OpenGL的头文件，避免与glad.h冲突
+#define GLFW_INCLUDE_NONE
+#include "include\GLFW\glfw3.h"
+#include "include\glad.h"
+#include "include\glm\glm.hpp"
+#include "include\opencv2\opencv.hpp"
+#include "include\SOIL2\SOIL2.h"
+#include "include\spdlog\spdlog.h"
+#include <vector>
+#include <Windows.h>
+#define KEY_DOWN(VK_NONAME) ((GetAsyncKeyState(VK_NONAME) & 0x8000) ? 1:0)
+
+// 全局变量
+extern long long score;
+
+// 全局变量
+extern GLFWwindow* window;
+extern int screenWidth, screenHeight;
+
+// handle权限提升函数
+inline bool EnablePrivileges(HANDLE hProcess, const WCHAR* pszPrivilegesName) {
+	HANDLE hToken = NULL;
+	LUID luidValue;
+	TOKEN_PRIVILEGES tokenPrivileges;
+	if (!OpenProcessToken(hProcess, TOKEN_ADJUST_PRIVILEGES, &hToken)) {
+		spdlog::error("Unable to elevate privileges");
+	}
+	if (!LookupPrivilegeValue(NULL, pszPrivilegesName, &luidValue)) {
+		CloseHandle(hToken);
+		spdlog::error("Unable to elevate privileges");
+	}
+	tokenPrivileges.PrivilegeCount = 1;
+	tokenPrivileges.Privileges[0].Luid = luidValue;
+	tokenPrivileges.Privileges[0].Attributes = SE_PRIVILEGE_ENABLED;
+	if (!AdjustTokenPrivileges(hToken, FALSE, &tokenPrivileges, 0, NULL, NULL)) {
+		CloseHandle(hToken);
+		spdlog::error("Unable to elevate privileges");
+	}
+	CloseHandle(hToken);
+	return GetLastError() == ERROR_SUCCESS;
+}
+
+// 获取系统内存使用情况
+inline bool GetSystemMemoryUsage() {
+	MEMORYSTATUSEX memInfo;
+	memInfo.dwLength = sizeof(memInfo);
+
+	if (GlobalMemoryStatusEx(&memInfo)) {
+		spdlog::info("Memory: {0}MB / {1}MB(%{2})", memInfo.ullTotalPhys / (1024 * 1024)
+			, memInfo.ullAvailPhys / (1024 * 1024)
+			, memInfo.dwMemoryLoad);
+		long long usedMB = memInfo.ullTotalPhys / (1024 * 1024) - memInfo.ullAvailPhys / (1024 * 1024);
+		spdlog::info("Used memory: {0}MB", usedMB);
+		return true;
+	}
+	else {
+		spdlog::error("Unable to retrieve system memory information");
+		return true;
+	}
+}
+
+// 获取CPU信息
+inline void GetCpuInfo() {
+	int cpuInfo[4] = { -1 };
+	char cpuBrand[0x40] = { 0 };
+
+	__cpuid(cpuInfo, 0x80000002);
+	memcpy(cpuBrand, cpuInfo, sizeof(cpuInfo));
+	__cpuid(cpuInfo, 0x80000003);
+	memcpy(cpuBrand + 16, cpuInfo, sizeof(cpuInfo));
+	__cpuid(cpuInfo, 0x80000004);
+	memcpy(cpuBrand + 32, cpuInfo, sizeof(cpuInfo));
+
+	spdlog::info("CPU:{}", cpuBrand);
+}
+
+// 窗口大小变化回调函数
+// 窗口大小变化回调函数
+inline void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
+	// 更新屏幕尺寸
+	screenWidth = width;
+	screenHeight = height;
+
+	// 更新视口
+	glViewport(0, 0, width, height);
+
+	// 更新投影矩阵
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glOrtho(0, width, 0, height, -1, 1);
+
+	// 重置模型视图矩阵
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+}
+
+// 初始化函数
+bool init() {
+	spdlog::info("Checking graphics card...");
+	
+	// 检测显卡
+	HDC hdc = GetDC(NULL);
+	if (hdc == NULL) {
+		spdlog::error("你连个显卡都没有玩啥游戏啊(you isn't have any graphics card)");
+		spdlog::info("Press any key to exit...");
+		_getch();
+		return false;
+	}
+	
+	// 检查颜色深度
+	int colorDepth = GetDeviceCaps(hdc, BITSPIXEL);
+	spdlog::info("Color depth: {0} bits", colorDepth);
+	ReleaseDC(NULL, hdc);
+	
+	// 尝试加载 OpenGL32.dll
+	HMODULE opengl32 = LoadLibraryA("opengl32.dll");
+	if (opengl32 == NULL) {
+		spdlog::error("OpenGL not supported (opengl32.dll not found)!");
+		spdlog::info("This program requires OpenGL support.");
+		spdlog::info("Press any key to exit...");
+		_getch();
+		return false;
+	}
+	FreeLibrary(opengl32);
+	spdlog::info("OpenGL support detected");
+	
+	spdlog::info("Getting CPU info...");
+	GetCpuInfo();
+	
+	spdlog::info("Enabling privileges...");
+	EnablePrivileges(GetCurrentProcess(), SE_DEBUG_NAME);
+	
+	// 检查系统内存使用情况
+	spdlog::info("Checking memory usage...");
+	if (!GetSystemMemoryUsage()) {
+		spdlog::error("Memory check failed!");
+		return false;
+	}
+
+	// 初始化GLFW
+	spdlog::info("Initializing GLFW...");
+	if (!glfwInit()) {
+		spdlog::error("Failed to initialize GLFW");
+		spdlog::info("Press any key to exit...");
+		_getch();
+		return false;
+	}
+	spdlog::info("GLFW initialized successfully!");
+	
+	// 使用OpenGL 4.3+兼容性配置文件，以支持计算着色器和固定功能管线
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_COMPAT_PROFILE);
+
+	// 获取主显示器
+	spdlog::info("Getting primary monitor...");
+	GLFWmonitor* monitor = glfwGetPrimaryMonitor();
+	if (!monitor) {
+		spdlog::error("Failed to get primary monitor");
+		glfwTerminate();
+		return false;
+	}
+
+	// 获取显示器视频模式
+	spdlog::info("Getting video mode...");
+	const GLFWvidmode* mode = glfwGetVideoMode(monitor);
+	if (!mode) {
+		spdlog::error("Failed to get video mode");
+		glfwTerminate();
+		return false;
+	}
+
+	// 存储屏幕尺寸
+	screenWidth = mode->width;
+	screenHeight = mode->height;
+	spdlog::info("Screen size: {0}x{1}", screenWidth, screenHeight);
+
+	// 创建全屏窗口
+	spdlog::info("Creating fullscreen window...");
+	window = glfwCreateWindow(screenWidth, screenHeight, "Immediate Mode Image Display", monitor, NULL);
+	if (!window) {
+		spdlog::error("Failed to create window");
+		glfwTerminate();
+		return false;
+	}
+	spdlog::info("Window created successfully!");
+
+	// 设置当前上下文
+	glfwMakeContextCurrent(window);
+
+	// 初始化GLAD（加载OpenGL函数指针）
+	spdlog::info("Initializing GLAD...");
+	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
+		spdlog::error("Failed to initialize GLAD");
+		glfwTerminate();
+		return false;
+	}
+	spdlog::info("GLAD initialized successfully!");
+
+	// 注册窗口大小变化回调
+	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+
+	// 启用2D纹理
+	glEnable(GL_TEXTURE_2D);
+
+	// 启用混合模式（用于透明图片）
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+	// 设置视口
+	glViewport(0, 0, screenWidth, screenHeight);
+
+	// 设置投影矩阵为正交投影
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glOrtho(0, screenWidth, 0, screenHeight, -1, 1);
+
+	// 设置模型视图矩阵
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+
+	return true;
+}
+
+#endif
